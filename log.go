@@ -106,7 +106,7 @@ func Log(input string, tags []string, message string, rw http.ResponseWriter, re
 	}
 
 	// Handle response.
-	if response.StatusCode != 201 {
+	if !(response.StatusCode == 201 || response.StatusCode == 200) {
 		c.Errorf("Loggly log did not send: '" + string(entry_json) + "'" + " Loggly HTTP response was code: " + strconv.Itoa(response.StatusCode))
 		return errors.New("Loggly log did not send: '" + string(entry_json) + "'" + " Loggly HTTP response was code: " + strconv.Itoa(response.StatusCode))
 	}
