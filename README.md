@@ -12,7 +12,7 @@ Licensed under the MIT License. See License.txt file.
 import ("github.com/AustenConrad/gologgly")
 
 // Add named input(s). Typically done in the main() function.
-loggly.AddInput("input name", "SHA-2 key from Loggly dashboard")
+gologgly.AddInput("input name", "SHA-2 key from Loggly dashboard")
 
 // Log anywhere within the application.
 gologgly.Log("input name", tags []string{"a tag", "another tag"}, "message you would like to store", rw, req)
@@ -47,18 +47,17 @@ import (
 )
 
 func main() {
-	
 	// Store a few Loggly inputs for reference by other parts of the application.
-	loggly.AddInput("errors", "SHA-2 key from Loggly dashboard")
-	loggly.AddInput("uploads", "SHA-2 key from Loggly dashboard")
-	loggly.AddInput("catsFTW", "SHA-2 key from Loggly dashboard")
+	gologgly.AddInput("errors", "SHA-2 key from Loggly dashboard")
+	gologgly.AddInput("uploads", "SHA-2 key from Loggly dashboard")
+	gologgly.AddInput("catsFTW", "SHA-2 key from Loggly dashboard")
 }
 
 func someUploadFunc(user string) (err error) {
 	
 	// Log an upload starting.
 	// EXAMPLE: For example, to find all of the uploads that have started using the Loggly console: 'search json.tags:started'
-	err := loggly.Log("uploads", []string{"Started", user, "Another tag"}, "{'some':'json', 'more': 'json stuff'}", rw, req)
+	err := gologgly.Log("uploads", []string{"Started", user, "Another tag"}, "{'some':'json', 'more': 'json stuff'}", rw, req)
 	if err != nil {
 		return err
 	}
@@ -69,12 +68,12 @@ func someUploadFunc(user string) (err error) {
 func someErrorHandler() {
 
 	// Log an error.
-	err := loggly.Log("errors", []string{"CRITICAL"}, "OMG where is the cat!?!", rw, req)
+	err := gologgly.Log("errors", []string{"CRITICAL"}, "OMG where is the cat!?!", rw, req)
 	if err != nil {
 		return err
 	}
 
-	err := loggly.Log("errors", []string{"EMERGENCY"}, "(to cat) Seriously, *how* did you get up here?", rw, req)
+	err := gologgly.Log("errors", []string{"EMERGENCY"}, "(to cat) Seriously, *how* did you get up here?", rw, req)
 	if err != nil {
 		return err
 	}
