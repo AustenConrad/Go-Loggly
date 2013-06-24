@@ -53,7 +53,7 @@ func main() {
 	gologgly.AddInput("catsFTW", "SHA-2 key from Loggly dashboard")
 }
 
-func someUploadFunc(user string) (err error) {
+func someUploadFunc(user string, rw http.ResponseWriter, req *http.Request) (err error) {
 	
 	// Log an upload starting.
 	// EXAMPLE: For example, to find all of the uploads that have started using the Loggly console: 'search json.tags:started'
@@ -65,7 +65,7 @@ func someUploadFunc(user string) (err error) {
 	return nil
 }
 
-func someErrorHandler() {
+func someErrorHandler(rw http.ResponseWriter, req *http.Request) (err error) {
 
 	// Log an error.
 	err := gologgly.Log("errors", []string{"CRITICAL"}, "OMG where is the cat!?!", rw, req)
