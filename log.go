@@ -87,7 +87,7 @@ func Log(input string, tags []string, message string, rw http.ResponseWriter, re
 	// Retrieve the input's url from the globally defined input map.
 	url := "https://logs.loggly.com/inputs/" + loggly[input]
 
-	// Initial a http.Client with an appengine/urlfetch transport.
+	// Initialize a http.Client with an appengine/urlfetch transport.
 	client := urlfetch.Client(c)
 
 	// Construct the request.
