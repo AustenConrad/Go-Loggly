@@ -1,4 +1,4 @@
-### gologgly
+### Go-Loggly
 Sample Go project demonstrating how to send JSON-formatted log data to Loggly from an app deployed on the Google App Engine.
 
 Creates a log entry on Loggly using the specified input within the input map. Logs the specified tags, specified message, file name, file line number, memory address, time, user agent, and user ip address/host.
@@ -9,7 +9,7 @@ Licensed under the MIT License. See License.txt file.
 ###### Usage:
 ```go
 // Import library.
-import ("github.com/AustenConrad/gologgly")
+import ("github.com/AustenConrad/Go-Loggly/gologgly")
 
 // Add named input(s). Typically done in the main() function.
 gologgly.AddInput("input name", "SHA-2 key from Loggly dashboard")
@@ -43,7 +43,7 @@ Stores in Loggy as:
 ```go
 
 import (
-	"github.com/AustenConrad/gologgly"
+	"github.com/AustenConrad/Go-Loggly/gologgly"
 )
 
 func main() {
