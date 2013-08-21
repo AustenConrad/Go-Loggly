@@ -1,8 +1,12 @@
-// +build !appengine
+// Specialized version for use with the Google App Engine's urlfetch api.
+
+// +build appengine
 
 package gologgly
 
 import (
+	"appengine"
+	"appengine/urlfetch"
 	"bytes"
 	"encoding/json"
 	"errors"
@@ -34,6 +38,9 @@ type entryFile struct {
 // Creates a log entry on Loggly using the specified input within the input map and setting the specified tags,
 // specified message, file name, file line number, memory address, time, user agent, and user ip address/host.
 func Log(input string, tags []string, message string, rw http.ResponseWriter, req *http.Request) (err error) {
+
+	// Initialize an appengine context.
+	c := appengine.NewContext(req)
 
 	// Get the error time right away so that it's as accurate as possible.
 	timestamp := time.Now()
@@ -84,8 +91,8 @@ func Log(input string, tags []string, message string, rw http.ResponseWriter, re
 	// Retrieve the input's url from the globally defined input map.
 	url := "https://logs.loggly.com/inputs/" + loggly[input]
 
-	// Initialize a http.Client.
-	client := http.Client{}
+	// Initialize a http.Client with an appengine/urlfetch transport.
+	client := urlfetch.Client(c)
 
 	// Construct the request.
 	request, err := http.NewRequest("POST", url, body)
