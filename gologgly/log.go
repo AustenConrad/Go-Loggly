@@ -76,7 +76,6 @@ func Log(input string, tags []string, message string, rw http.ResponseWriter, re
 	// Construct the body of the request.
 	entry_json, err := json.Marshal(entry)
 	if err != nil {
-		c.Errorf(err.Error())
 		return err
 	}
 	body := bytes.NewReader(entry_json)
@@ -90,7 +89,6 @@ func Log(input string, tags []string, message string, rw http.ResponseWriter, re
 	// Construct the request.
 	request, err := http.NewRequest("POST", url, body)
 	if err != nil {
-		c.Errorf(err.Error())
 		return err
 	}
 	request.Header.Add("Content-Type", "application/json")
@@ -98,13 +96,11 @@ func Log(input string, tags []string, message string, rw http.ResponseWriter, re
 	// Send log message to Loggly.
 	response, err := client.Do(request)
 	if err != nil {
-		c.Errorf(err.Error())
 		return err
 	}
 
 	// Handle response.
 	if !(response.StatusCode == 201 || response.StatusCode == 200) {
-		c.Errorf("Loggly log did not send: '" + string(entry_json) + "'" + " Loggly HTTP response was code: " + strconv.Itoa(response.StatusCode))
 		return errors.New("Loggly log did not send: '" + string(entry_json) + "'" + " Loggly HTTP response was code: " + strconv.Itoa(response.StatusCode))
 	}
 
