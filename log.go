@@ -81,7 +81,18 @@ func Log(input string, tags []string, message string, rw http.ResponseWriter, re
 	body := bytes.NewReader(entry_json)
 
 	// Retrieve the input's url from the globally defined input map.
-	url := "https://logs.loggly.com/inputs/" + loggly[input]
+	url := "https://logs-01.loggly.com/inputs/" + loggly[input]
+
+	// Append tags to the input's url.
+	first_run := true
+	for _, value := range tags {
+		if first_run {
+			url += "/tag/" + value
+			first_run = false
+		} else {
+			url += "," + value
+		}
+	}
 
 	// Initialize a http.Client.
 	client := http.Client{}

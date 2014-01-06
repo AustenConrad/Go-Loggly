@@ -20,7 +20,7 @@ import (
 )
 
 // Add named input(s). Typically done in the main() function.
-gologgly.AddInput("input name", "SHA-2 key from Loggly dashboard")
+gologgly.AddInput("input name", "Loggly customer token")
 
 // Log anywhere within the application.
 gologgly.Log("input name", tags []string{"a tag", "another tag"}, "message you would like to store", rw, req)
@@ -56,9 +56,9 @@ import (
 
 func main() {
 	// Store a few Loggly inputs for reference by other parts of the application.
-	gologgly.AddInput("errors", "SHA-2 key from Loggly dashboard")
-	gologgly.AddInput("uploads", "SHA-2 key from Loggly dashboard")
-	gologgly.AddInput("catsFTW", "SHA-2 key from Loggly dashboard")
+	gologgly.AddInput("errors", "ABCDEFG123456789")
+	gologgly.AddInput("uploads", "ABCDEFG123456789")
+	gologgly.AddInput("catsFTW", "ABCDEFG123456789")
 }
 
 func someUploadFunc(user string, rw http.ResponseWriter, req *http.Request) (err error) {
@@ -76,12 +76,12 @@ func someUploadFunc(user string, rw http.ResponseWriter, req *http.Request) (err
 func someErrorHandler(rw http.ResponseWriter, req *http.Request) (err error) {
 
 	// Log an error.
-	err := gologgly.Log("errors", []string{"CRITICAL"}, "OMG where is the cat!?!", rw, req)
+	err := gologgly.Log("errors", []string{"CRITICAL", "cat"}, "OMG where is the cat!?!", rw, req)
 	if err != nil {
 		return err
 	}
 
-	err := gologgly.Log("errors", []string{"EMERGENCY"}, "(to cat) Seriously, *how* did you get up here?", rw, req)
+	err := gologgly.Log("errors", []string{"EMERGENCY", "cat"}, "(to cat) Seriously, *how* did you get up here?", rw, req)
 	if err != nil {
 		return err
 	}
