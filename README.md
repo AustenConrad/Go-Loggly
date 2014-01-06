@@ -7,6 +7,12 @@ Licensed under the MIT License. See License.txt file.
 
 
 ###### Usage:
+Set your GOPATH and then install via:
+```bash
+go get github.com/AustenConrad/Go-Loggly
+```
+
+Use in your application via:
 ```go
 // Import library.
 import (
