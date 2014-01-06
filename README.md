@@ -9,7 +9,9 @@ Licensed under the MIT License. See License.txt file.
 ###### Usage:
 ```go
 // Import library.
-import ("github.com/AustenConrad/Go-Loggly/gologgly")
+import (
+	gologgly "github.com/AustenConrad/Go-Loggly"
+)
 
 // Add named input(s). Typically done in the main() function.
 gologgly.AddInput("input name", "SHA-2 key from Loggly dashboard")
